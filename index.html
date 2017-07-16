@@ -1,16 +1,27 @@
 <!DOCTYPE html>
     <head>
         <meta charset="utf-8">
-        <title>Rubiolang</title
+        <title>Rubiolang</title>
+        <script src="interpreter.js"></script>
     </head>
     <body>
+        <script>
+            "use strict";
+
+            function calcular() {
+                const source_code = document.getElementById("source-code");
+                ejecutar(source_code.value);
+            }
+
+        </script>
         <h1>Rubiolang<h1>
         <p>Un lenguaje de programación para resolver problemas de primaria.</p>
         <h2>¡Pruébalo!</h2>
         <form>
             <textarea id="source-code" name="source-code"></textarea>
-            <input type="button" value="Calcular" />
+            <input type="button" value="Calcular" onclick="calcular();"/>
             <output name="result" />
         </form>
+
     </body>
 <html>
