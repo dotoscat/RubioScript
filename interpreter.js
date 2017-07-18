@@ -48,7 +48,7 @@ function preparar_codigo(codigo) {
         for (let operacion of relaciones_operacion){
             let encuentro = operacion[0].exec(instruccion);
             if (encuentro === null) continue;
-            return {operacion: operacion, encuentro: encuentro};
+            return {operacion: operacion[1], encuentro: encuentro};
         }
         return null;
     });
@@ -59,6 +59,7 @@ function ejecutar(codigo) {
     const instrucciones = preparar_codigo(codigo);
     for (let instruccion of instrucciones) {
         if (instruccion === null) continue;
+        instruccion.operacion(instruccion.encuentro);
         console.log(instruccion);
         //operacion_asignacion(instruccion);
     }
