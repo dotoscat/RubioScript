@@ -23,6 +23,12 @@ let relaciones_operacion = new Map();
 relaciones_operacion.set(regex_asignacion, operacion_asignacion);
 relaciones_operacion.set(regex_respuesta, operacion_respuesta);
 
+function limpiar_interprete(){
+    sujetos.clear();
+    objetos.clear();
+    respuestas = [];
+}
+
 function operacion_asignacion(instruccion){
     const sujeto = instruccion[1];
     const verbo = instruccion[2];
@@ -49,7 +55,8 @@ function operacion_respuesta(instruccion){
 }
 
 function preparar_codigo(codigo) {
-    const codigo_separado = codigo.split('.?,');
+    const codigo_separado = codigo.split(/\./);
+    console.log("separado", codigo_separado);
     const codigo_limpio = codigo_separado.map((linea_codigo) => linea_codigo.trim());
     const instrucciones = codigo_limpio.map((instruccion) => {
         for (let operacion of relaciones_operacion){
@@ -63,6 +70,7 @@ function preparar_codigo(codigo) {
 }
 
 function ejecutar(codigo) {
+    limpiar_interprete();
     const instrucciones = preparar_codigo(codigo);
     for (let instruccion of instrucciones) {
         if (instruccion === null) continue;
