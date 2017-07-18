@@ -49,7 +49,7 @@ function operacion_respuesta(instruccion){
 }
 
 function preparar_codigo(codigo) {
-    const codigo_separado = codigo.split('.');
+    const codigo_separado = codigo.split('.?,');
     const codigo_limpio = codigo_separado.map((linea_codigo) => linea_codigo.trim());
     const instrucciones = codigo_limpio.map((instruccion) => {
         for (let operacion of relaciones_operacion){
