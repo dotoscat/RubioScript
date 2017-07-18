@@ -10,7 +10,8 @@
 
             function calcular() {
                 const source_code = document.getElementById("source-code");
-                ejecutar(source_code.value);
+                const respuesta = ejecutar(source_code.value);
+                document.getElementById("result").innerText = respuesta;
             }
 
         </script>
@@ -20,7 +21,7 @@
         <form>
             <textarea id="source-code" name="source-code"></textarea>
             <input type="button" value="Calcular" onclick="calcular();"/>
-            <output name="result" />
+            <output id="result" name="result" />
         </form>
 
     </body>

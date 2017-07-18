@@ -14,13 +14,14 @@ Ejemplo: "Maria tiene 2 manzana. Si se come 2. Cuántas tendrá?"
 
 let sujetos = new Map();
 let objetos = new Map();
+let respuestas = [];
 
-const asignacion = /(\w+)\s+(tiene)\s+(\d+)\s+(\w+)/
-const respuesta = /(Cuantos|Cuantas)\s+(\w+)\s+tiene(\w+)\?/
+const regex_asignacion = /(\w+)\s+(tiene)\s+(\d+)\s+(\w+)/
+const regex_respuesta = /(Cuantos|Cuantas)\s+(\w+)\s+(tiene)\s+(\w+)\s*?\?/
 
 let relaciones_operacion = new Map();
-relaciones_operacion.set(asignacion, operacion_asignacion);
-relaciones_operacion.set(respuesta, operacion_respuesta);
+relaciones_operacion.set(regex_asignacion, operacion_asignacion);
+relaciones_operacion.set(regex_respuesta, operacion_respuesta);
 
 function operacion_asignacion(instruccion){
     const sujeto = instruccion[1];
@@ -38,7 +39,13 @@ function operacion_asignacion(instruccion){
 }
 
 function operacion_respuesta(instruccion){
-    console.log("Una respuesta");
+    let pronombre = instruccion[1];
+    let objeto = instruccion[2];
+    let verbo = instruccion[3];
+    let sujeto = instruccion[4];
+    let sujeto_posesion = sujetos.get(sujeto).get(objeto);
+    const respuesta = sujeto + " " + verbo + " " + sujeto_posesion + " " + objeto;
+    respuestas.push(respuesta);
 }
 
 function preparar_codigo(codigo) {
@@ -63,6 +70,13 @@ function ejecutar(codigo) {
         console.log(instruccion);
         //operacion_asignacion(instruccion);
     }
-    console.log(sujetos);
-    console.log(objetos);
+    let respuesta = "";
+    while(respuestas.length > 0){
+        let una = respuestas.pop();
+        respuesta = respuestas + una;
+    }
+    console.log(respuesta);
+    return respuesta;
+    //console.log(sujetos);
+    //console.log(objetos);
 }
