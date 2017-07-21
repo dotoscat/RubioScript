@@ -7,8 +7,10 @@ Definición informal del lenguaje
 Cada instruccion está separada por punto.
 
 <sujeto>(tiene)<n><objeto> =
+si se le (quita|da) <objeto> a <sujeto> -+
+si <sujeto> le da <n> <objetos> a <sujeto2> sujeto- sujeto+
 
-Ejemplo: "Maria tiene 2 manzana. Si se come 2. Cuántas tendrá?"
+Ejemplo: "Maria tiene 2 manzana. Si se quita 2. Cuántas tendrá?"
 
 */
 
@@ -16,17 +18,29 @@ let sujetos = new Map();
 let objetos = new Map();
 let respuestas = [];
 
+// <sujeto>, tiene, <cantidad> <objeto>
 const regex_asignacion = /(\w+)\s+(tiene)\s+(\d+)\s+(\w+)/
+// (Cuantos|Cuantas) <objeto> (tiene) <sujeto>
 const regex_respuesta = /(Cuantos|Cuantas)\s+(\w+)\s+(tiene)\s+(\w+)\s*?\?/
+// <cantidad> <objeto> <sujeto>
+const regex_dar_a_sujeto = /[Ss]i se da\s+(\d+)\s+(\w+)\s*?a\s*?(\w+)/
 
 let relaciones_operacion = new Map();
 relaciones_operacion.set(regex_asignacion, operacion_asignacion);
 relaciones_operacion.set(regex_respuesta, operacion_respuesta);
+relaciones_operacion.set(regex_dar_a_sujeto, operacion_suma);
 
 function limpiar_interprete(){
     sujetos.clear();
     objetos.clear();
     respuestas = [];
+}
+
+function operacion_suma(instruccion){
+    const cantidad = instruccion[1];
+    const objeto = instruccion[2];
+    const sujeto = instruccion[3];
+    console.log(cantidad, objeto, sujeto);
 }
 
 function operacion_asignacion(instruccion){
@@ -75,8 +89,6 @@ function ejecutar(codigo) {
     for (let instruccion of instrucciones) {
         if (instruccion === null) continue;
         instruccion.operacion(instruccion.encuentro);
-        console.log(instruccion);
-        //operacion_asignacion(instruccion);
     }
     let respuesta = "";
     while(respuestas.length > 0){
