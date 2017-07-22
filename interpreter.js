@@ -94,9 +94,10 @@ function operacion_respuesta(instruccion){
 }
 
 function preparar_codigo(codigo) {
-    const codigo_separado = codigo.split(/\./);
+    const codigo_separado = codigo.split(/\.|,/);
     console.log("separado", codigo_separado);
     const codigo_limpio = codigo_separado.map((linea_codigo) => linea_codigo.trim());
+    console.log("limpio", codigo_limpio);
     const instrucciones = codigo_limpio.map((instruccion) => {
         for (let operacion of relaciones_operacion){
             let encuentro = operacion[0].exec(instruccion);
@@ -105,6 +106,7 @@ function preparar_codigo(codigo) {
         }
         return null;
     });
+    console.log("instrucciones", instrucciones);
     return instrucciones;
 }
 
