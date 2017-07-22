@@ -25,12 +25,15 @@ const regex_respuesta = /([Cc]uant[oa]s)\s+(\w+)\s+(tiene)\s+(\w+)\s*?\?/
 const regex_respuesta_global = /[Cc]uant[oa]s\s+(\w+)\s+hay\s+en\s+total\s*?\?/
 // <cantidad> <objeto> <sujeto>, 'quita' es una suma negativa, o resta
 const regex_dar_a_sujeto = /[Ss]i se (da|quita)\s+(\d+)\s+(\w+)\s*?a\s*?(\w+)/
+// Si <sujeto> le (da/quita) <cantidad> <objetos> a <receptor>
+const regex_sujeto_da_a_receptor = /[Ss]i\s+(\w+)\s+le\s+(da|quita)\s+(\d+)\s+(\w+)\s+a\s+(\w+)/
 
 let relaciones_operacion = new Map();
 relaciones_operacion.set(regex_asignacion, operacion_asignacion);
 relaciones_operacion.set(regex_respuesta, operacion_respuesta);
 relaciones_operacion.set(regex_respuesta_global, operacion_respuesta_global);
 relaciones_operacion.set(regex_dar_a_sujeto, operacion_suma);
+relaciones_operacion.set(regex_sujeto_da_a_receptor, operacion_suma_sujeto_receptor);
 
 function limpiar_interprete(){
     sujetos.clear();
@@ -49,6 +52,18 @@ function ponerSujetoCantidadObjeto(sujeto, cantidad, objeto){
         sujetos.set(sujeto, new Map());
     }
     sujetos.get(sujeto).set(objeto, cantidad < 0 ? 0 : cantidad);
+}
+
+function operacion_suma_sujeto_receptor(instruccion){
+    const sujeto = instruccion[1];
+    const accion = instruccion[2];
+    const cantidad = accion === "da" ? parseInt(instruccion[3]) : -parseInt(instruccion[3]);
+    const objeto = instruccion[4];
+    const receptor = instruccion[5];
+    const sujetoCantidadObjeto = obtenerSujetoCantidadObjeto(sujeto, objeto);
+    ponerSujetoCantidadObjeto(sujeto, sujetoCantidadObjeto + -cantidad, objeto);
+    const receptorCantidadObjeto = obtenerSujetoCantidadObjeto(receptor, objeto);
+    ponerSujetoCantidadObjeto(receptor, receptorCantidadObjeto + cantidad, objeto);
 }
 
 function operacion_suma(instruccion){
