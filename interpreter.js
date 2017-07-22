@@ -40,7 +40,7 @@ function obtenerSujetoCantidadObjeto(sujeto, objeto){
     if (!sujetos.has(sujeto)){
         return 0;
     }
-    return sujetos.get(sujeto).get(objeto, cantidad);
+    return sujetos.get(sujeto).get(objeto);
 }
 
 function ponerSujetoCantidadObjeto(sujeto, cantidad, objeto){
