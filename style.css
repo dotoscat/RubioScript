@@ -10,3 +10,8 @@ textarea {
     color: Black;
     background-color: LightYellow;
 }
+
+output {
+    display: block;
+    margin-top: 8pt;
+}
