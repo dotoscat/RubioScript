@@ -7,7 +7,7 @@ Definición informal del lenguaje
 Cada instruccion está separada por punto.
 
 <sujeto>(tiene)<n><objeto> =
-si se le (quita|da) <objeto> a <sujeto> -+
+si le (quita|da) <objeto> a <sujeto> -+
 si <sujeto> le da <n> <objetos> a <sujeto2> sujeto- sujeto+
 
 Ejemplo: "Maria tiene 2 manzana. Si se quita 2. Cuántas tendrá?"
@@ -17,6 +17,7 @@ Ejemplo: "Maria tiene 2 manzana. Si se quita 2. Cuántas tendrá?"
 let sujetos = new Map();
 let respuestas = [];
 
+// definicion informal del lenguaje
 // <sujeto>, tiene, <cantidad> <objeto>
 const regex_asignacion = /(\w+)\s+(tiene)\s+(\d+)\s+(\w+)/
 // (Cuantos|Cuantas) <objeto> (tiene) <sujeto>
@@ -134,6 +135,4 @@ function ejecutar(codigo) {
     }
     console.log(respuesta);
     return respuesta;
-    //console.log(sujetos);
-    //console.log(objetos);
 }
