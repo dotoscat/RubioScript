@@ -36,6 +36,20 @@ function limpiar_interprete(){
     respuestas = [];
 }
 
+function obtenerSujetoCantidadObjeto(sujeto, objeto){
+    if (!sujetos.has(sujeto)){
+        return 0;
+    }
+    return sujetos.get(sujeto).get(objeto, cantidad);
+}
+
+function ponerSujetoCantidadObjeto(sujeto, cantidad, objeto){
+    if (!sujetos.has(sujeto)){
+        sujetos.set(sujeto, new Map());
+    }
+    sujetos.get(sujeto).set(objeto, cantidad);
+}
+
 function operacion_suma(instruccion){
     const cantidad = instruccion[1];
     const objeto = instruccion[2];
@@ -48,10 +62,7 @@ function operacion_asignacion(instruccion){
     const verbo = instruccion[2];
     const cantidad = Number(instruccion[3]);
     const objeto = instruccion[4];
-    if (!sujetos.has(sujeto)){
-        sujetos.set(sujeto, new Map());
-    }
-    sujetos.get(sujeto).set(objeto, cantidad);
+    ponerSujetoCantidadObjeto(sujeto, cantidad, objeto);
     if (!objetos.has(objeto)){
         objetos.set(objeto, 0);
     }
