@@ -14,11 +14,14 @@
                 const respuesta = ejecutar(source_code.value);
                 document.getElementById("result").innerText = respuesta;
             }
-
         </script>
         <h1>RubioScript<h1>
         <p>Un lenguaje de script que describe y resuelve problemas de primaria.</p>
         <h2>¡Pruébalo!</h2>
+        <noscript>
+            <p>Lo podrás probar si el navegador puede usar JavaScript, cosa que no parece
+             que haga.</p>
+        </noscript>
         <form>
             <textarea id="source-code" name="source-code" cols="50" rows="7"></textarea>
             <input type="button" value="Calcular" onclick="calcular();" />
