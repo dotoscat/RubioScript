@@ -1,7 +1,7 @@
 "use strict";
 
 /*
-
+RubioScript
 Definición informal del lenguaje
 
 Cada instruccion está separada por punto.
