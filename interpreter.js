@@ -21,9 +21,9 @@ let respuestas = [];
 // <sujeto>, tiene, <cantidad> <objeto>
 const regex_asignacion = /(\w+)\s+(tiene)\s+(\d+)\s+(\w+)/
 // (Cuantos|Cuantas) <objeto> (tiene) <sujeto>
-const regex_respuesta = /([Cc]uant[oa]s)\s+(\w+)\s+(tiene)\s+(\w+)\s*?\?/
+const regex_respuesta = /([Cc]u[aá]nt[oa]s)\s+(\w+)\s+(tiene)\s+(\w+)\s*?\?/
 // (Cuantos|Cuantas) <objeto> hay en total?
-const regex_respuesta_global = /[Cc]uant[oa]s\s+(\w+)\s+hay\s+en\s+total\s*?\?/
+const regex_respuesta_global = /[Cc]u[aá]nt[oa]s\s+(\w+)\s+hay\s+en\s+total\s*?\?/
 // <cantidad> <objeto> <sujeto>, 'quita' es una suma negativa, o resta
 const regex_dar_a_sujeto = /[Ss]i se (da|quita)\s+(\d+)\s+(\w+)\s*?a\s*?(\w+)/
 // Si <sujeto> le (da/quita) <cantidad> <objetos> a <receptor>
