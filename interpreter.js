@@ -80,7 +80,11 @@ function operacion_respuesta(instruccion){
 
 function operacion_respuesta_global(instruccion){
     const objeto = instruccion[1];
-    const respuesta = "Hay " + obtenerCantidadObjeto(objeto) + " " + objeto;
+    let cantidad = 0;
+    for (let bolsa of sujetos.values()){
+        cantidad += bolsa.get(objeto);
+    }
+    const respuesta = "Hay " + cantidad + " " + objeto + " en total.";
     respuestas.push(respuesta);
 }
 
