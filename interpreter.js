@@ -22,12 +22,15 @@ let respuestas = [];
 const regex_asignacion = /(\w+)\s+(tiene)\s+(\d+)\s+(\w+)/
 // (Cuantos|Cuantas) <objeto> (tiene) <sujeto>
 const regex_respuesta = /([Cc]uant[oa]s)\s+(\w+)\s+(tiene)\s+(\w+)\s*?\?/
+// (Cuantos|Cuantas) <objeto> hay en total?
+const regex_respuesta_global = /[Cc]uant[oa]s\s+(\w+)\s+hay\s+en\s+total\s*?\?/
 // <cantidad> <objeto> <sujeto>, 'quita' es una suma negativa, o resta
 const regex_dar_a_sujeto = /[Ss]i se (da|quita)\s+(\d+)\s+(\w+)\s*?a\s*?(\w+)/
 
 let relaciones_operacion = new Map();
 relaciones_operacion.set(regex_asignacion, operacion_asignacion);
 relaciones_operacion.set(regex_respuesta, operacion_respuesta);
+relaciones_operacion.set(regex_respuesta_global, operacion_respuesta_global);
 relaciones_operacion.set(regex_dar_a_sujeto, operacion_suma);
 
 function limpiar_interprete(){
@@ -80,7 +83,8 @@ function operacion_asignacion(instruccion){
     const cantidad = parseInt(instruccion[3]);
     const objeto = instruccion[4];
     ponerSujetoCantidadObjeto(sujeto, cantidad, objeto);
-    ponerCantidadObjeto(cantidad, objeto);
+    const cantidadObjeto = obtenerCantidadObjeto(objeto);
+    ponerCantidadObjeto(cantidad, cantidadObjeto + objeto);
 }
 
 function operacion_respuesta(instruccion){
@@ -93,8 +97,14 @@ function operacion_respuesta(instruccion){
     respuestas.push(respuesta);
 }
 
+function operacion_respuesta_global(instruccion){
+    const objeto = instruccion[1];
+    const respuesta = "Hay " + obtenerCantidadObjeto(objeto) + " " + objeto;
+    respuestas.push(respuesta);
+}
+
 function preparar_codigo(codigo) {
-    const codigo_separado = codigo.split(/\.|,|y/);
+    const codigo_separado = codigo.split(/\.|,/);
     console.log("separado", codigo_separado);
     const codigo_limpio = codigo_separado.map((linea_codigo) => linea_codigo.trim());
     console.log("limpio", codigo_limpio);
