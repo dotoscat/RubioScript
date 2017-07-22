@@ -50,6 +50,20 @@ function ponerSujetoCantidadObjeto(sujeto, cantidad, objeto){
     sujetos.get(sujeto).set(objeto, cantidad);
 }
 
+function obtenerCantidadObjeto(objeto){
+    if (!objetos.has(objeto)){
+        return 0;
+    }
+    return objetos.get(objeto);
+}
+
+function ponerCantidadObjeto(cantidad, objeto){
+    if (!objetos.has(objeto)){
+        objetos.set(objeto, 0);
+    }
+    objetos.set(objeto, objetos.get(objeto) + cantidad);
+}
+
 function operacion_suma(instruccion){
     const cantidad = instruccion[1];
     const objeto = instruccion[2];
@@ -63,10 +77,7 @@ function operacion_asignacion(instruccion){
     const cantidad = Number(instruccion[3]);
     const objeto = instruccion[4];
     ponerSujetoCantidadObjeto(sujeto, cantidad, objeto);
-    if (!objetos.has(objeto)){
-        objetos.set(objeto, 0);
-    }
-    objetos.set(objeto, objetos.get(objeto) + cantidad);
+    ponerCantidadObjeto(cantidad, objeto);
 }
 
 function operacion_respuesta(instruccion){
