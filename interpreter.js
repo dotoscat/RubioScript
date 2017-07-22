@@ -47,7 +47,7 @@ function ponerSujetoCantidadObjeto(sujeto, cantidad, objeto){
     if (!sujetos.has(sujeto)){
         sujetos.set(sujeto, new Map());
     }
-    sujetos.get(sujeto).set(objeto, cantidad);
+    sujetos.get(sujeto).set(objeto, parseInt(cantidad) < 0 ? 0 : parseInt(cantidad));
 }
 
 function obtenerCantidadObjeto(objeto){
@@ -61,7 +61,7 @@ function ponerCantidadObjeto(cantidad, objeto){
     if (!objetos.has(objeto)){
         objetos.set(objeto, 0);
     }
-    objetos.set(objeto, objetos.get(objeto) + cantidad);
+    objetos.set(objeto, parseInt(cantidad) < 0 ? 0 : parseInt(cantidad));
 }
 
 function operacion_suma(instruccion){
