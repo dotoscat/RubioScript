@@ -84,11 +84,11 @@ function operacion_asignacion(instruccion){
 }
 
 function operacion_respuesta(instruccion){
-    let pronombre = instruccion[1];
-    let objeto = instruccion[2];
-    let verbo = instruccion[3];
-    let sujeto = instruccion[4];
-    let sujeto_posesion = sujetos.get(sujeto).get(objeto);
+    const pronombre = instruccion[1];
+    const objeto = instruccion[2];
+    const verbo = instruccion[3];
+    const sujeto = instruccion[4];
+    const sujeto_posesion = sujetos.get(sujeto).get(objeto);
     const respuesta = sujeto + " " + verbo + " " + sujeto_posesion + " " + objeto;
     respuestas.push(respuesta);
 }
