@@ -15,7 +15,6 @@ Ejemplo: "Maria tiene 2 manzana. Si se quita 2. Cuántas tendrá?"
 */
 
 let sujetos = new Map();
-let objetos = new Map();
 let respuestas = [];
 
 // <sujeto>, tiene, <cantidad> <objeto>
@@ -35,7 +34,6 @@ relaciones_operacion.set(regex_dar_a_sujeto, operacion_suma);
 
 function limpiar_interprete(){
     sujetos.clear();
-    objetos.clear();
     respuestas = [];
 }
 
@@ -53,20 +51,6 @@ function ponerSujetoCantidadObjeto(sujeto, cantidad, objeto){
     sujetos.get(sujeto).set(objeto, cantidad < 0 ? 0 : cantidad);
 }
 
-function obtenerCantidadObjeto(objeto){
-    if (!objetos.has(objeto)){
-        return 0;
-    }
-    return objetos.get(objeto);
-}
-
-function ponerCantidadObjeto(cantidad, objeto){
-    if (!objetos.has(objeto)){
-        objetos.set(objeto, 0);
-    }
-    objetos.set(objeto, cantidad < 0 ? 0 : cantidad);
-}
-
 function operacion_suma(instruccion){
     const accion = instruccion[1];
     const cantidad = accion === "da" ? parseInt(instruccion[2]) : -parseInt(instruccion[2])
@@ -74,7 +58,6 @@ function operacion_suma(instruccion){
     const sujeto = instruccion[4];
     const sujetoCantidadObjeto = obtenerSujetoCantidadObjeto(sujeto, objeto);
     ponerSujetoCantidadObjeto(sujeto, sujetoCantidadObjeto + cantidad, objeto);
-    ponerCantidadObjeto(obtenerCantidadObjeto() + cantidad, objeto);
 }
 
 function operacion_asignacion(instruccion){
@@ -83,8 +66,6 @@ function operacion_asignacion(instruccion){
     const cantidad = parseInt(instruccion[3]);
     const objeto = instruccion[4];
     ponerSujetoCantidadObjeto(sujeto, cantidad, objeto);
-    const cantidadObjeto = obtenerCantidadObjeto(objeto);
-    ponerCantidadObjeto(cantidad, cantidadObjeto + objeto);
 }
 
 function operacion_respuesta(instruccion){
@@ -92,7 +73,7 @@ function operacion_respuesta(instruccion){
     const objeto = instruccion[2];
     const verbo = instruccion[3];
     const sujeto = instruccion[4];
-    const sujeto_posesion = sujetos.get(sujeto).get(objeto);
+    const sujeto_posesion = obtenerSujetoCantidadObjeto(sujeto, objeto);
     const respuesta = sujeto + " " + verbo + " " + sujeto_posesion + " " + objeto;
     respuestas.push(respuesta);
 }
