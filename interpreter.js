@@ -47,7 +47,7 @@ function ponerSujetoCantidadObjeto(sujeto, cantidad, objeto){
     if (!sujetos.has(sujeto)){
         sujetos.set(sujeto, new Map());
     }
-    sujetos.get(sujeto).set(objeto, parseInt(cantidad) < 0 ? 0 : parseInt(cantidad));
+    sujetos.get(sujeto).set(objeto, cantidad < 0 ? 0 : cantidad);
 }
 
 function obtenerCantidadObjeto(objeto){
@@ -61,20 +61,22 @@ function ponerCantidadObjeto(cantidad, objeto){
     if (!objetos.has(objeto)){
         objetos.set(objeto, 0);
     }
-    objetos.set(objeto, parseInt(cantidad) < 0 ? 0 : parseInt(cantidad));
+    objetos.set(objeto, cantidad < 0 ? 0 : cantidad);
 }
 
 function operacion_suma(instruccion){
-    const cantidad = instruccion[1];
+    const cantidad = parseInt(instruccion[1]);
     const objeto = instruccion[2];
     const sujeto = instruccion[3];
-    console.log(cantidad, objeto, sujeto);
+    const sujetoCantidadObjeto = obtenerSujetoCantidadObjeto(sujeto, objeto);
+    ponerSujetoCantidadObjeto(sujeto, sujetoCantidadObjeto + cantidad, objeto);
+    ponerCantidadObjeto(obtenerCantidadObjeto() + cantidad, objeto);
 }
 
 function operacion_asignacion(instruccion){
     const sujeto = instruccion[1];
     const verbo = instruccion[2];
-    const cantidad = Number(instruccion[3]);
+    const cantidad = parseInt(instruccion[3]);
     const objeto = instruccion[4];
     ponerSujetoCantidadObjeto(sujeto, cantidad, objeto);
     ponerCantidadObjeto(cantidad, objeto);
