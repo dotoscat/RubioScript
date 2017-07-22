@@ -22,8 +22,8 @@ let respuestas = [];
 const regex_asignacion = /(\w+)\s+(tiene)\s+(\d+)\s+(\w+)/
 // (Cuantos|Cuantas) <objeto> (tiene) <sujeto>
 const regex_respuesta = /(Cuantos|Cuantas)\s+(\w+)\s+(tiene)\s+(\w+)\s*?\?/
-// <cantidad> <objeto> <sujeto>
-const regex_dar_a_sujeto = /[Ss]i se da\s+(\d+)\s+(\w+)\s*?a\s*?(\w+)/
+// <cantidad> <objeto> <sujeto>, 'quita' es una suma negativa, o resta
+const regex_dar_a_sujeto = /[Ss]i se (da|quita)\s+(\d+)\s+(\w+)\s*?a\s*?(\w+)/
 
 let relaciones_operacion = new Map();
 relaciones_operacion.set(regex_asignacion, operacion_asignacion);
@@ -65,9 +65,10 @@ function ponerCantidadObjeto(cantidad, objeto){
 }
 
 function operacion_suma(instruccion){
-    const cantidad = parseInt(instruccion[1]);
-    const objeto = instruccion[2];
-    const sujeto = instruccion[3];
+    const accion = instruccion[1];
+    const cantidad = accion === "da" ? parseInt(instruccion[2]) : -parseInt(instruccion[2])
+    const objeto = instruccion[3];
+    const sujeto = instruccion[4];
     const sujetoCantidadObjeto = obtenerSujetoCantidadObjeto(sujeto, objeto);
     ponerSujetoCantidadObjeto(sujeto, sujetoCantidadObjeto + cantidad, objeto);
     ponerCantidadObjeto(obtenerCantidadObjeto() + cantidad, objeto);
