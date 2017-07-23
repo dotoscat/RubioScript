@@ -30,13 +30,13 @@ const regexObjetoASujeto = /[Ss]i se (da|quita)\s+(\d+)\s+(\w+)\s*?a\s*?(\w+)/
 const regexObjetoEntreSujetos = /[Ss]i\s+(\w+)\s+le\s+(da|quita)\s+(\d+)\s+(\w+)\s+a\s+(\w+)/
 
 let relaciones_operacion = new Map();
-relaciones_operacion.set(regexAsignacion, operacion_asignacion);
-relaciones_operacion.set(regexRespuesta, operacion_respuesta);
-relaciones_operacion.set(regexRespuestaGlobal, operacion_respuesta_global);
-relaciones_operacion.set(regexObjetoASujeto, operacion_suma);
-relaciones_operacion.set(regexObjetoEntreSujetos, operacion_suma_sujeto_receptor);
+relaciones_operacion.set(regexAsignacion, operacionAsignacion);
+relaciones_operacion.set(regexRespuesta, operacionRespuesta);
+relaciones_operacion.set(regexRespuestaGlobal, operacionRespuestaGlobal);
+relaciones_operacion.set(regexObjetoASujeto, operacionSuma);
+relaciones_operacion.set(regexObjetoEntreSujetos, operacionSumaSujetoReceptor);
 
-function limpiar_interprete(){
+function limpiarInterprete(){
     sujetos.clear();
     respuestas = [];
 }
@@ -55,7 +55,7 @@ function ponerSujetoCantidadObjeto(sujeto, cantidad, objeto){
     sujetos.get(sujeto).set(objeto, cantidad < 0 ? 0 : cantidad);
 }
 
-function operacion_suma_sujeto_receptor(instruccion){
+function operacionSumaSujetoReceptor(instruccion){
     const sujeto = instruccion[1];
     const accion = instruccion[2];
     const cantidad = accion === "da" ? parseInt(instruccion[3]) : -parseInt(instruccion[3]);
@@ -67,7 +67,7 @@ function operacion_suma_sujeto_receptor(instruccion){
     ponerSujetoCantidadObjeto(receptor, receptorCantidadObjeto + cantidad, objeto);
 }
 
-function operacion_suma(instruccion){
+function operacionSuma(instruccion){
     const accion = instruccion[1];
     const cantidad = accion === "da" ? parseInt(instruccion[2]) : -parseInt(instruccion[2])
     const objeto = instruccion[3];
@@ -76,7 +76,7 @@ function operacion_suma(instruccion){
     ponerSujetoCantidadObjeto(sujeto, sujetoCantidadObjeto + cantidad, objeto);
 }
 
-function operacion_asignacion(instruccion){
+function operacionAsignacion(instruccion){
     const sujeto = instruccion[1];
     const verbo = instruccion[2];
     const cantidad = parseInt(instruccion[3]);
@@ -84,7 +84,7 @@ function operacion_asignacion(instruccion){
     ponerSujetoCantidadObjeto(sujeto, cantidad, objeto);
 }
 
-function operacion_respuesta(instruccion){
+function operacionRespuesta(instruccion){
     const pronombre = instruccion[1];
     const objeto = instruccion[2];
     const verbo = instruccion[3];
@@ -94,7 +94,7 @@ function operacion_respuesta(instruccion){
     respuestas.push(respuesta);
 }
 
-function operacion_respuesta_global(instruccion){
+function operacionRespuestaGlobal(instruccion){
     const objeto = instruccion[1];
     let cantidad = 0;
     for (let bolsa of sujetos.values()){
@@ -104,7 +104,7 @@ function operacion_respuesta_global(instruccion){
     respuestas.push(respuesta);
 }
 
-function preparar_codigo(codigo) {
+function prepararCodigo(codigo) {
     const codigo_separado = codigo.split(/\.|,/);
     console.log("separado", codigo_separado);
     const codigo_limpio = codigo_separado.map((linea_codigo) => linea_codigo.trim());
@@ -122,8 +122,8 @@ function preparar_codigo(codigo) {
 }
 
 function ejecutar(codigo) {
-    limpiar_interprete();
-    const instrucciones = preparar_codigo(codigo);
+    limpiarInterprete();
+    const instrucciones = prepararCodigo(codigo);
     for (let instruccion of instrucciones) {
         if (instruccion === null) continue;
         instruccion.operacion(instruccion.encuentro);
