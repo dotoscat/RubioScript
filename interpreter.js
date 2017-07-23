@@ -25,7 +25,7 @@ const regex_respuesta = /([Cc]u[aá]nt[oa]s)\s+(\w+)\s+(tiene)\s+(\w+)\s*?\?/
 // (Cuantos|Cuantas) <objeto> hay en total?
 const regex_respuesta_global = /[Cc]u[aá]nt[oa]s\s+(\w+)\s+hay\s+en\s+total\s*?\?/
 // <cantidad> <objeto> <sujeto>, 'quita' es una suma negativa, o resta
-const regex_dar_a_sujeto = /[Ss]i se (da|quita)\s+(\d+)\s+(\w+)\s*?a\s*?(\w+)/
+const regex_objeto_a_sujeto = /[Ss]i se (da|quita)\s+(\d+)\s+(\w+)\s*?a\s*?(\w+)/
 // Si <sujeto> le (da/quita) <cantidad> <objetos> a <receptor>
 const regex_sujeto_da_a_receptor = /[Ss]i\s+(\w+)\s+le\s+(da|quita)\s+(\d+)\s+(\w+)\s+a\s+(\w+)/
 
@@ -33,7 +33,7 @@ let relaciones_operacion = new Map();
 relaciones_operacion.set(regex_asignacion, operacion_asignacion);
 relaciones_operacion.set(regex_respuesta, operacion_respuesta);
 relaciones_operacion.set(regex_respuesta_global, operacion_respuesta_global);
-relaciones_operacion.set(regex_dar_a_sujeto, operacion_suma);
+relaciones_operacion.set(regex_objeto_a_sujeto, operacion_suma);
 relaciones_operacion.set(regex_sujeto_da_a_receptor, operacion_suma_sujeto_receptor);
 
 function limpiar_interprete(){
