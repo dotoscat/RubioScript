@@ -6,6 +6,8 @@ let respuestas = [];
 // definicion informal del lenguaje
 // <sujeto>, tiene, <cantidad> <objeto>
 const regexAsignacion = /(\w+)\s+(tiene)\s+(\d+)\s+(\w+)/
+// En (un|una) <sujeto> (hay|había) <cantidad> <objeto>
+const regexAsignacionContenedor = /En\s+(un|una)\s+(\w+)\s+(hay|habia)\s+(\d+)\s+(\w+)/
 // (Cuantos|Cuantas) <objeto> (tiene) <sujeto>
 const regexRespuesta = /([Cc]u[aá]nt[oa]s)\s+(\w+)\s+(tiene)\s+(\w+)\s*?\??/
 // (Cuantos|Cuantas) <objeto> hay en total?
@@ -17,6 +19,7 @@ const regexObjetoEntreSujetos = /[Ss]i\s+(\w+)\s+le\s+(da|quita)\s+(\d+)\s+(\w+)
 
 let tablaOperaciones = new Map();
 tablaOperaciones.set(regexAsignacion, operacionAsignacion);
+tablaOperaciones.set(regexAsignacionContenedor, operacionAsignacionContenedor);
 tablaOperaciones.set(regexRespuesta, operacionRespuesta);
 tablaOperaciones.set(regexRespuestaGlobal, operacionRespuestaGlobal);
 tablaOperaciones.set(regexObjetoASujeto, operacionSuma);
@@ -70,6 +73,14 @@ function operacionAsignacion(instruccion){
     ponerSujetoCantidadObjeto(sujeto, cantidad, objeto);
 }
 
+function operacionAsignacionContenedor(instruccion){
+    const contenedor = instruccion[2];
+    const cantidad = instruccion[4];
+    const objeto = instruccion[5];
+    ponerSujetoCantidadObjeto(contenedor, cantidad, objeto);
+    console.log(instruccion);
+}
+
 function operacionRespuesta(instruccion){
     const pronombre = instruccion[1];
     const objeto = instruccion[2];
@@ -92,9 +103,9 @@ function operacionRespuestaGlobal(instruccion){
 
 function prepararCodigo(codigo) {
     const codigoSeparado = codigo.split(/\.|,|\?(?=\s)/);
-    console.log("separado", codigoSeparado);
+    // console.log("separado", codigoSeparado);
     const codigoLimpio = codigoSeparado.map((lineaCodigo) => lineaCodigo.trim());
-    console.log("limpio", codigoLimpio);
+    // console.log("limpio", codigoLimpio);
     const instrucciones = codigoLimpio.map((instruccion) => {
         for (let operacion of tablaOperaciones){
             let encuentro = operacion[0].exec(instruccion);
@@ -119,6 +130,6 @@ function ejecutar(codigo) {
         let una = respuestas.pop();
         respuesta = respuestas.length === 0 ? respuesta + una : respuesta + una + ", ";
     }
-    console.log(respuesta);
+    // console.log(respuesta);
     return respuesta;
 }
