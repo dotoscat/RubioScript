@@ -19,22 +19,22 @@ let respuestas = [];
 
 // definicion informal del lenguaje
 // <sujeto>, tiene, <cantidad> <objeto>
-const regex_asignacion = /(\w+)\s+(tiene)\s+(\d+)\s+(\w+)/
+const regexAsignacion = /(\w+)\s+(tiene)\s+(\d+)\s+(\w+)/
 // (Cuantos|Cuantas) <objeto> (tiene) <sujeto>
-const regex_respuesta = /([Cc]u[aá]nt[oa]s)\s+(\w+)\s+(tiene)\s+(\w+)\s*?\?/
+const regexRespuesta = /([Cc]u[aá]nt[oa]s)\s+(\w+)\s+(tiene)\s+(\w+)\s*?\?/
 // (Cuantos|Cuantas) <objeto> hay en total?
-const regex_respuesta_global = /[Cc]u[aá]nt[oa]s\s+(\w+)\s+hay\s+en\s+total\s*?\?/
+const regexRespuestaGlobal = /[Cc]u[aá]nt[oa]s\s+(\w+)\s+hay\s+en\s+total\s*?\?/
 // <cantidad> <objeto> <sujeto>, 'quita' es una suma negativa, o resta
-const regex_objeto_a_sujeto = /[Ss]i se (da|quita)\s+(\d+)\s+(\w+)\s*?a\s*?(\w+)/
+const regexObjetoASujeto = /[Ss]i se (da|quita)\s+(\d+)\s+(\w+)\s*?a\s*?(\w+)/
 // Si <sujeto> le (da/quita) <cantidad> <objetos> a <receptor>
-const regex_sujeto_da_a_receptor = /[Ss]i\s+(\w+)\s+le\s+(da|quita)\s+(\d+)\s+(\w+)\s+a\s+(\w+)/
+const regexObjetoEntreSujetos = /[Ss]i\s+(\w+)\s+le\s+(da|quita)\s+(\d+)\s+(\w+)\s+a\s+(\w+)/
 
 let relaciones_operacion = new Map();
-relaciones_operacion.set(regex_asignacion, operacion_asignacion);
-relaciones_operacion.set(regex_respuesta, operacion_respuesta);
-relaciones_operacion.set(regex_respuesta_global, operacion_respuesta_global);
-relaciones_operacion.set(regex_objeto_a_sujeto, operacion_suma);
-relaciones_operacion.set(regex_sujeto_da_a_receptor, operacion_suma_sujeto_receptor);
+relaciones_operacion.set(regexAsignacion, operacion_asignacion);
+relaciones_operacion.set(regexRespuesta, operacion_respuesta);
+relaciones_operacion.set(regexRespuestaGlobal, operacion_respuesta_global);
+relaciones_operacion.set(regexObjetoASujeto, operacion_suma);
+relaciones_operacion.set(regexObjetoEntreSujetos, operacion_suma_sujeto_receptor);
 
 function limpiar_interprete(){
     sujetos.clear();
