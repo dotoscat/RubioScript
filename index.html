@@ -34,6 +34,15 @@
             Pedro tiene 3 manzanas.
         </code>
         <p>Con esto se crea un sujeto llamado Pedro que tiene 3 unidades del objeto manzanas.</p>
+        <h4>Contenedor</h4>
+        <p>Una variante del <em>sujeto</em> son los <em>contenedores</em>. Es exactamente
+        igual que el <em>sujeto</em>. Solamente es para hacer el lenguaje más expresivo.</p>
+        <code>
+            En (un|una) 'contenedor' (hay|habia) 'unidades' 'objeto'
+        </code>
+        <code>
+            En un cuenco habia 3 platanos.
+        </code>
         <h3>Salida</h3>
         <p>Obviamente necesitamos saber el resultado del problema. Esto se hace preguntando
          <strong>sobre el sujeto</strong> o <strong>globalmente</strong>.</p>
@@ -48,6 +57,12 @@
             Pedro tiene 3 manzanas.
         </samp>
         <p>Puedes usar . y , para separar las sentencias.</p>
+        <code>
+            (Cuantos|Cuantas) 'objeto' (tiene|hay en) (el|la|ese|esa) 'contenedor'
+        </code>
+        <code>
+            Cuantos platanos hay en el cuenco?
+        </code>
         <h4>Globalmente</h4>
         <code>
             Cuantos|Cuantas 'objeto' hay en total?

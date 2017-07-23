@@ -1,5 +1,5 @@
 "use strict";
-
+//operaciones con sujetos-contenedores!!!!!
 let sujetos = new Map();
 let respuestas = [];
 
