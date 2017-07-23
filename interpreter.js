@@ -21,9 +21,9 @@ let respuestas = [];
 // <sujeto>, tiene, <cantidad> <objeto>
 const regexAsignacion = /(\w+)\s+(tiene)\s+(\d+)\s+(\w+)/
 // (Cuantos|Cuantas) <objeto> (tiene) <sujeto>
-const regexRespuesta = /([Cc]u[aá]nt[oa]s)\s+(\w+)\s+(tiene)\s+(\w+)\s*?\?/
+const regexRespuesta = /([Cc]u[aá]nt[oa]s)\s+(\w+)\s+(tiene)\s+(\w+)\s*?\??/
 // (Cuantos|Cuantas) <objeto> hay en total?
-const regexRespuestaGlobal = /[Cc]u[aá]nt[oa]s\s+(\w+)\s+hay\s+en\s+total\s*?\?/
+const regexRespuestaGlobal = /[Cc]u[aá]nt[oa]s\s+(\w+)\s+hay\s+en\s+total\s*?\??/
 // <cantidad> <objeto> <sujeto>, 'quita' es una suma negativa, o resta
 const regexObjetoASujeto = /[Ss]i se (da|quita)\s+(\d+)\s+(\w+)\s*?a\s*?(\w+)/
 // Si <sujeto> le (da/quita) <cantidad> <objetos> a <receptor>
@@ -105,7 +105,7 @@ function operacionRespuestaGlobal(instruccion){
 }
 
 function prepararCodigo(codigo) {
-    const codigoSeparado = codigo.split(/\.|,/);
+    const codigoSeparado = codigo.split(/\.|,|\?(?=\s)/);
     console.log("separado", codigoSeparado);
     const codigoLimpio = codigoSeparado.map((lineaCodigo) => lineaCodigo.trim());
     console.log("limpio", codigoLimpio);
@@ -131,7 +131,7 @@ function ejecutar(codigo) {
     let respuesta = "";
     while(respuestas.length > 0){
         let una = respuestas.pop();
-        respuesta = respuestas + una;
+        respuesta = respuestas.length === 0 ? respuesta + una : respuesta + una + ", ";
     }
     console.log(respuesta);
     return respuesta;
