@@ -9,7 +9,7 @@ const regexAsignacion = /(\w+)\s+(tiene)\s+(\d+)\s+(\w+)/
 // En (un|una) <sujeto> (hay|había) <cantidad> <objeto>
 const regexAsignacionContenedor = /En\s+(un|una)\s+(\w+)\s+(hay|habia)\s+(\d+)\s+(\w+)/
 // (Cuantos|Cuantas) <objeto> (tiene) <sujeto>
-const regexRespuesta = /([Cc]u[aá]nt[oa]s)\s+(\w+)\s+(tiene)\s+(\w+)\s*?\??/
+const regexRespuesta = /([Cc]u[aá]nt[oa]s)\s+(\w+)\s+(tiene|hay en)\s+(el|la|ese|esa)?\s+(\w+)\s*?\??/
 // (Cuantos|Cuantas) <objeto> hay en total?
 const regexRespuestaGlobal = /[Cc]u[aá]nt[oa]s\s+(\w+)\s+hay\s+en\s+total\s*?\??/
 // <cantidad> <objeto> <sujeto>, 'quita' es una suma negativa, o resta
@@ -84,10 +84,13 @@ function operacionAsignacionContenedor(instruccion){
 function operacionRespuesta(instruccion){
     const pronombre = instruccion[1];
     const objeto = instruccion[2];
-    const verbo = instruccion[3];
-    const sujeto = instruccion[4];
-    const sujeto_posesion = obtenerSujetoCantidadObjeto(sujeto, objeto);
-    const respuesta = sujeto + " " + verbo + " " + sujeto_posesion + " " + objeto;
+    const verbo = instruccion[3];//'hay en' no es exactamente un verbo
+    const determinante = instruccion.length === 6 ? instruccion[4] : null;
+    const sujeto = instruccion.length === 6 ? instruccion[5] : instruccion[4];
+    const sujetoPosesion = obtenerSujetoCantidadObjeto(sujeto, objeto);
+    const respuesta = determinante === null ?
+        sujeto + " " + verbo + " " + sujeto_posesion + " " + objeto :
+        "Hay en " + determinante + " " + sujeto + " " + sujetoPosesion + " " + objeto;
     respuestas.push(respuesta);
 }
 
