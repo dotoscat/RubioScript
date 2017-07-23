@@ -105,11 +105,11 @@ function operacionRespuestaGlobal(instruccion){
 }
 
 function prepararCodigo(codigo) {
-    const codigo_separado = codigo.split(/\.|,/);
-    console.log("separado", codigo_separado);
-    const codigo_limpio = codigo_separado.map((linea_codigo) => linea_codigo.trim());
-    console.log("limpio", codigo_limpio);
-    const instrucciones = codigo_limpio.map((instruccion) => {
+    const codigoSeparado = codigo.split(/\.|,/);
+    console.log("separado", codigoSeparado);
+    const codigoLimpio = codigoSeparado.map((lineaCodigo) => lineaCodigo.trim());
+    console.log("limpio", codigoLimpio);
+    const instrucciones = codigoLimpio.map((instruccion) => {
         for (let operacion of relaciones_operacion){
             let encuentro = operacion[0].exec(instruccion);
             if (encuentro === null) continue;
