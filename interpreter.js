@@ -29,12 +29,12 @@ const regexObjetoASujeto = /[Ss]i se (da|quita)\s+(\d+)\s+(\w+)\s*?a\s*?(\w+)/
 // Si <sujeto> le (da/quita) <cantidad> <objetos> a <receptor>
 const regexObjetoEntreSujetos = /[Ss]i\s+(\w+)\s+le\s+(da|quita)\s+(\d+)\s+(\w+)\s+a\s+(\w+)/
 
-let relaciones_operacion = new Map();
-relaciones_operacion.set(regexAsignacion, operacionAsignacion);
-relaciones_operacion.set(regexRespuesta, operacionRespuesta);
-relaciones_operacion.set(regexRespuestaGlobal, operacionRespuestaGlobal);
-relaciones_operacion.set(regexObjetoASujeto, operacionSuma);
-relaciones_operacion.set(regexObjetoEntreSujetos, operacionSumaSujetoReceptor);
+let tablaOperaciones = new Map();
+tablaOperaciones.set(regexAsignacion, operacionAsignacion);
+tablaOperaciones.set(regexRespuesta, operacionRespuesta);
+tablaOperaciones.set(regexRespuestaGlobal, operacionRespuestaGlobal);
+tablaOperaciones.set(regexObjetoASujeto, operacionSuma);
+tablaOperaciones.set(regexObjetoEntreSujetos, operacionSumaSujetoReceptor);
 
 function limpiarInterprete(){
     sujetos.clear();
@@ -110,7 +110,7 @@ function prepararCodigo(codigo) {
     const codigoLimpio = codigoSeparado.map((lineaCodigo) => lineaCodigo.trim());
     console.log("limpio", codigoLimpio);
     const instrucciones = codigoLimpio.map((instruccion) => {
-        for (let operacion of relaciones_operacion){
+        for (let operacion of tablaOperaciones){
             let encuentro = operacion[0].exec(instruccion);
             if (encuentro === null) continue;
             return {operacion: operacion[1], encuentro: encuentro};
