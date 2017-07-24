@@ -16,6 +16,9 @@ const regexRespuestaGlobal = /[Cc]u[aá]nt[oa]s\s+(\w+)\s+hay\s+en\s+total\s*?\?
 const regexObjetoASujeto = /[Ss]i se (da|quita)\s+(\d+)\s+(\w+)\s*?a\s*?(\w+)/
 // Si <sujeto> le (da/quita) <cantidad> <objetos> a <receptor>
 const regexObjetoEntreSujetos = /[Ss]i\s+(\w+)\s+le\s+(da|quita)\s+(\d+)\s+(\w+)\s+a\s+(\w+)/
+// <sujeto> coge <cantidad> <objeto> de (la|el|un|una) <contenedor>
+const regexSujetoCogeContenedor = /(\w+)\s+coge\s+(\d+)\s+(\w+)\s+de\s+(la|el|un|una)\s+(\w+)/
+// <sujeto> pone <cantidad> <objeto> en (la|el|un|una) <contenedor>
 
 let tablaOperaciones = new Map();
 tablaOperaciones.set(regexAsignacion, operacionAsignacion);
@@ -24,6 +27,7 @@ tablaOperaciones.set(regexRespuesta, operacionRespuesta);
 tablaOperaciones.set(regexRespuestaGlobal, operacionRespuestaGlobal);
 tablaOperaciones.set(regexObjetoASujeto, operacionSuma);
 tablaOperaciones.set(regexObjetoEntreSujetos, operacionSumaSujetoReceptor);
+tablaOperaciones.set(regexSujetoCogeContenedor, operacionSujetoCogeContenedor);
 
 function limpiarInterprete(){
     sujetos.clear();
@@ -63,6 +67,15 @@ function operacionSuma(instruccion){
     const sujeto = instruccion[4];
     const sujetoCantidadObjeto = obtenerSujetoCantidadObjeto(sujeto, objeto);
     ponerSujetoCantidadObjeto(sujeto, sujetoCantidadObjeto + cantidad, objeto);
+}
+
+function operacionSujetoCogeContenedor(instruccion){
+    const sujeto = instruccion[1];
+    const cantidad = parseInt(instruccion[2]);
+    const objeto = instruccion[3];
+    const determinante = instruccion[4];
+    const contenedor = instruccion[5];
+    operacionSumaSujetoReceptor([null, sujeto, "coge", cantidad, objeto, determinante]);
 }
 
 function operacionAsignacion(instruccion){
