@@ -57,8 +57,9 @@
             Pedro tiene 3 manzanas.
         </samp>
         <p>Puedes usar . y , para separar las sentencias.</p>
+        <p>Esta forma es para contenedores.</p>
         <code>
-            (Cuantos|Cuantas) 'objeto' (tiene|hay en) (el|la|ese|esa) 'contenedor'
+            (Cuantos|Cuantas) 'objeto' hay en (el|la|ese|esa) 'contenedor'
         </code>
         <code>
             Cuantos platanos hay en el cuenco?
@@ -75,7 +76,8 @@
         </samp>
         <h3>Operaciones</h3>
         <p>Obviamente necesitamos hacer operaciones como <em>dar</em> o <em>quitar</em>
-         <strong>objetos a sujetos</strong> y <strong>objetos entre sujetos</strong>.</p>
+         <strong>objetos a sujetos</strong>, <strong>objetos entre sujetos</strong>
+          y <strong>objetos entre sujetos y contenedores</strong>.</p>
         <h4>Objetos a sujetos</h4>
         <code>
             Si se (da|quita) 'unidades' 'objeto' a 'sujeto'.
@@ -98,6 +100,16 @@
         </samp>
         <p>Aquí se ve que María no tiene, o no se sabe, cuántas manzanas tiene al principio. Se asume
         que no tiene nada María. Si se pregunta cuántas manzanas tiene María pues la respuesta es 3.</p>
+        <h4>Objetos entre sujetos y contenedores</h4>
+        <p>Esta es una forma especial entre <strong>objetos entre sujetos</strong>. De hecho
+         actúa de la misma forma.</p>
+        <code>
+            'sujeto' (coge|pone) 'unidades' 'objeto' (de|en) (la|el|un|una) 'contenedor'
+        </code>
+        <samp>
+            Maria coge 3 peras de el cuenco.
+            Pedro pone 2 peras en el cuenco.
+        </samp>
         <h2>¡Pruébalo!</h2>
         <noscript>
             <p>Lo podrás probar si el navegador puede usar JavaScript, cosa que no parece
