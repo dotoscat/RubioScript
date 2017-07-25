@@ -75,7 +75,7 @@ function operacionSujetoCogeContenedor(instruccion){
     const objeto = instruccion[3];
     const determinante = instruccion[4];
     const contenedor = instruccion[5];
-    operacionSumaSujetoReceptor([null, sujeto, "coge", cantidad, objeto, determinante]);
+    operacionSumaSujetoReceptor([null, sujeto, "coge", cantidad, objeto, contenedor]);
 }
 
 function operacionAsignacion(instruccion){
@@ -88,10 +88,10 @@ function operacionAsignacion(instruccion){
 
 function operacionAsignacionContenedor(instruccion){
     const contenedor = instruccion[2];
-    const cantidad = instruccion[4];
+    const cantidad = parseInt(instruccion[4]);
     const objeto = instruccion[5];
     ponerSujetoCantidadObjeto(contenedor, cantidad, objeto);
-    console.log(instruccion);
+    //console.log(instruccion);
 }
 
 function operacionRespuesta(instruccion){
