@@ -10,3 +10,5 @@ no los necesitaba.
 - Reconocer vocales con acentos.
 
 # LICENCIA
+
+![Affero General Public License v3 (AGPL-3.0)](https://www.gnu.org/graphics/agplv3-155x51.png)
