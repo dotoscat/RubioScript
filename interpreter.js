@@ -15,6 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>..
 
 "use strict";
+const VERSION = "1.0.0";
+
 let sujetos = new Map();
 let respuestas = [];
 
