@@ -15,111 +15,115 @@
                 document.getElementById("result").innerText = respuesta;
             }
         </script>
-        <h1>RubioScript</h1>
-        <p>Un lenguaje de script que describe y resuelve problemas de primaria.</p>
-        <p>RubioScript surge de la inspiración en los cuadernillos de problemas Rubio de mi infancia, la necesidad
-        de hacer algo distinto para pasar el rato, y las ganas de hacer mi propio lenguaje
-        de programación e intérprete. <del>Espero que no me demanden.</del></p>
-        <h2>Sintaxis</h2>
-        <p>RubioScript es un pequeño lenguaje de programación declarativo específico para describir y resolver
-        problemas de primaria. Su sintaxis es muy parecido al español. Se trabaja con <em>sujetos</em>, <em>objetos</em> y
-        <em>unidades</em>. Los <em>objetos</em> no son parte de una orientación a objetos.</p>
-        <h3>Asignación</h3>
-        <p>Tiene la forma</p>
-        <code>
-            'sujeto' tiene 'objeto' 'unidades'
-        </code>
-        <p>Ejemplo</p>
-        <code>
-            Pedro tiene 3 manzanas.
-        </code>
-        <p>Con esto se crea un sujeto llamado Pedro que tiene 3 unidades del objeto manzanas.</p>
-        <h4>Contenedor</h4>
-        <p>Una variante del <em>sujeto</em> son los <em>contenedores</em>. Es exactamente
-        igual que el <em>sujeto</em>. Solamente es para hacer el lenguaje más expresivo.</p>
-        <code>
-            En (un|una) 'contenedor' (hay|habia) 'unidades' 'objeto'
-        </code>
-        <code>
-            En un cuenco habia 3 platanos.
-        </code>
-        <h3>Salida</h3>
-        <p>Obviamente necesitamos saber el resultado del problema. Esto se hace preguntando
-         <strong>sobre el sujeto</strong> o <strong>globalmente</strong>.</p>
-        <h4>Sobre el sujeto</h4>
-        <code>
-            (Cuántas|Cuántos) 'objeto' tiene 'sujeto'?
-        </code>
-        <code>
-            Pedro tiene 3 manzanas, cuántas manzanas tiene Pedro?
-        </code>
-        <samp>
-            Pedro tiene 3 manzanas.
-        </samp>
-        <p>Puedes usar . y , para separar las sentencias.</p>
-        <p>Esta forma es para contenedores.</p>
-        <code>
-            (Cuantos|Cuantas) 'objeto' hay en (el|la|ese|esa) 'contenedor'
-        </code>
-        <code>
-            Cuantos platanos hay en el cuenco?
-        </code>
-        <h4>Globalmente</h4>
-        <code>
-            Cuantos|Cuantas 'objeto' hay en total?
-        </code>
-        <code>
-            Pedro tiene 1 caramelos, Maria tiene 2 caramelos, cuantos caramelos hay en total?
-        </code>
-        <samp>
-            Hay 3 caramelos en total.
-        </samp>
-        <h3>Operaciones</h3>
-        <p>Obviamente necesitamos hacer operaciones como <em>dar</em> o <em>quitar</em>
-         <strong>objetos a sujetos</strong>, <strong>objetos entre sujetos</strong>
-          y <strong>objetos entre sujetos y contenedores</strong>.</p>
-        <h4>Objetos a sujetos</h4>
-        <code>
-            Si se (da|quita) 'unidades' 'objeto' a 'sujeto'.
-        </code>
-        <code>
-            Pedro tiene 4 manzanas. Si se da 2 manzanas a Pedro, cuantas manzanas tiene Pedro?
-        </code>
-        <samp>
-            Pedro tiene 6 manzanas.
-        </samp>
-        <h4>Objetos entre sujetos</h4>
-        <code>
-            Si 'sujeto' (da|quita) 'unidades' 'objetos' a 'sujeto2'
-        </code>
-        <code>
-            Pedro tiene 3 manzanas. Si Maria quita 3 manzanas a Pedro, cuantas manzanas tiene Pedro?
-        </code>
-        <samp>
-            Pedro tiene 0 manzanas.
-        </samp>
-        <p>Aquí se ve que María no tiene, o no se sabe, cuántas manzanas tiene al principio. Se asume
-        que no tiene nada María. Si se pregunta cuántas manzanas tiene María pues la respuesta es 3.</p>
-        <h4>Objetos entre sujetos y contenedores</h4>
-        <p>Esta es una forma especial entre <strong>objetos entre sujetos</strong>. De hecho
-         actúa de la misma forma.</p>
-        <code>
-            'sujeto' (coge|pone) 'unidades' 'objeto' (de|en) (la|el|un|una) 'contenedor'
-        </code>
-        <samp>
-            Maria coge 3 peras de el cuenco.
-            Pedro pone 2 peras en el cuenco.
-        </samp>
-        <h2>¡Pruébalo!</h2>
-        <noscript>
-            <p>Lo podrás probar si el navegador puede usar JavaScript, cosa que no parece
-             que haga.</p>
-        </noscript>
-        <form>
-            <textarea id="source-code" name="source-code" cols="50" rows="7"></textarea>
-            <input type="button" value="Calcular" onclick="calcular();" />
-            <output id="result" name="result" for="source-code">Resultado</output>
-        </form>
-
+        <article>
+            <h1>RubioScript</h1>
+            <p>Un lenguaje de script que describe y resuelve problemas de primaria.</p>
+            <p>RubioScript surge de la inspiración en los cuadernillos de problemas Rubio de mi infancia, la necesidad
+            de hacer algo distinto para pasar el rato, y las ganas de hacer mi propio lenguaje
+            de programación e intérprete. <del>Espero que no me demanden.</del></p>
+            <h2>Sintaxis</h2>
+            <p>RubioScript es un pequeño lenguaje de programación declarativo específico para describir y resolver
+            problemas de primaria. Su sintaxis es muy parecido al español. Se trabaja con <em>sujetos</em>, <em>objetos</em> y
+            <em>unidades</em>. Los <em>objetos</em> no son parte de una orientación a objetos.</p>
+            <h3>Asignación</h3>
+            <p>Tiene la forma</p>
+            <code>
+                'sujeto' tiene 'objeto' 'unidades'
+            </code>
+            <p>Ejemplo</p>
+            <code>
+                Pedro tiene 3 manzanas.
+            </code>
+            <p>Con esto se crea un sujeto llamado Pedro que tiene 3 unidades del objeto manzanas.</p>
+            <h4>Contenedor</h4>
+            <p>Una variante del <em>sujeto</em> son los <em>contenedores</em>. Es exactamente
+            igual que el <em>sujeto</em>. Solamente es para hacer el lenguaje más expresivo.</p>
+            <code>
+                En (un|una) 'contenedor' (hay|habia) 'unidades' 'objeto'
+            </code>
+            <code>
+                En un cuenco habia 3 platanos.
+            </code>
+            <h3>Salida</h3>
+            <p>Obviamente necesitamos saber el resultado del problema. Esto se hace preguntando
+             <strong>sobre el sujeto</strong> o <strong>globalmente</strong>.</p>
+            <h4>Sobre el sujeto</h4>
+            <code>
+                (Cuántas|Cuántos) 'objeto' tiene 'sujeto'?
+            </code>
+            <code>
+                Pedro tiene 3 manzanas, cuántas manzanas tiene Pedro?
+            </code>
+            <samp>
+                Pedro tiene 3 manzanas.
+            </samp>
+            <p>Puedes usar . y , para separar las sentencias.</p>
+            <p>Esta forma es para contenedores.</p>
+            <code>
+                (Cuantos|Cuantas) 'objeto' hay en (el|la|ese|esa) 'contenedor'
+            </code>
+            <code>
+                Cuantos platanos hay en el cuenco?
+            </code>
+            <h4>Globalmente</h4>
+            <code>
+                Cuantos|Cuantas 'objeto' hay en total?
+            </code>
+            <code>
+                Pedro tiene 1 caramelos, Maria tiene 2 caramelos, cuantos caramelos hay en total?
+            </code>
+            <samp>
+                Hay 3 caramelos en total.
+            </samp>
+            <h3>Operaciones</h3>
+            <p>Obviamente necesitamos hacer operaciones como <em>dar</em> o <em>quitar</em>
+             <strong>objetos a sujetos</strong>, <strong>objetos entre sujetos</strong>
+              y <strong>objetos entre sujetos y contenedores</strong>.</p>
+            <h4>Objetos a sujetos</h4>
+            <code>
+                Si se (da|quita) 'unidades' 'objeto' a 'sujeto'.
+            </code>
+            <code>
+                Pedro tiene 4 manzanas. Si se da 2 manzanas a Pedro, cuantas manzanas tiene Pedro?
+            </code>
+            <samp>
+                Pedro tiene 6 manzanas.
+            </samp>
+            <h4>Objetos entre sujetos</h4>
+            <code>
+                Si 'sujeto' (da|quita) 'unidades' 'objetos' a 'sujeto2'
+            </code>
+            <code>
+                Pedro tiene 3 manzanas. Si Maria quita 3 manzanas a Pedro, cuantas manzanas tiene Pedro?
+            </code>
+            <samp>
+                Pedro tiene 0 manzanas.
+            </samp>
+            <p>Aquí se ve que María no tiene, o no se sabe, cuántas manzanas tiene al principio. Se asume
+            que no tiene nada María. Si se pregunta cuántas manzanas tiene María pues la respuesta es 3.</p>
+            <h4>Objetos entre sujetos y contenedores</h4>
+            <p>Esta es una forma especial entre <strong>objetos entre sujetos</strong>. De hecho
+             actúa de la misma forma.</p>
+            <code>
+                'sujeto' (coge|pone) 'unidades' 'objeto' (de|en) (la|el|un|una) 'contenedor'
+            </code>
+            <samp>
+                Maria coge 3 peras de el cuenco.
+                Pedro pone 2 peras en el cuenco.
+            </samp>
+        </article>
+        <div id="interpreter">
+            <h2>¡Pruébalo!</h2>
+            <noscript>
+                <p>Lo podrás probar si el navegador puede usar JavaScript, cosa que no parece
+                 que haga.</p>
+            </noscript>
+            <form>
+                <textarea id="source-code" name="source-code" cols="50" rows="7"></textarea>
+                <input type="button" value="Calcular" onclick="calcular();" />
+                <output id="result" name="result" for="source-code">Resultado</output>
+            </form>
+        </div>
+        <p><a href="#" id="arriba">Arriba</a></p>
     </body>
 <html>
