@@ -7,5 +7,6 @@ La página es una implementación en JavaScript de *RubioScript*.
 
 - Test unitarios al intérprete. Creía que al ser un proyecto pequeño
 no los necesitaba.
+- Reconocer vocales con acentos.
 
 # LICENCIA
