@@ -3,6 +3,8 @@
 Lenguaje de programación e intérprete.
 La página es una implementación en JavaScript de *RubioScript*.
 
+Pruébalo en [https://dotoscat.github.io/RubioScript/](https://dotoscat.github.io/RubioScript/)
+
 # TODO
 
 - Test unitarios al intérprete. Creía que al ser un proyecto pequeño
